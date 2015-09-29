@@ -23,7 +23,7 @@ info.onAdd = function (map) {
 info.update = function (props) {
     this._div.innerHTML = (props ?
         '<h3>Tract ' + props.TRACTCE + ', Blockgroup ' + props.BLKGRPCE + '</h3><hr /><b>' 
-        + props.PrcntAbv30 + '%</b> of households, <b>' + props.TtlAbv30 + '</b> total, have a gross rent as percent of income greater than 30%.'
+        + props.PrcntAbv30 + '%</b> of households (<b>' + props.TtlAbv30 + '</b> of <b>' + props.TtlHouses + '</b> total) have a gross rent as percent of income greater than 30%.'
         : 'Hover over a block group');
 };
 
