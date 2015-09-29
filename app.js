@@ -1,5 +1,9 @@
-var map = L.map('map')
+var map = L.map('map', {
+    attributionControl: false
+})
     .setView([38.046408, -84.497083], 11);
+
+L.control.attribution().addAttribution("<a href='http://www.census.gov/' target='_blank'>United States Census Bureau</a>").addTo(map);
 
 var base = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
 	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
