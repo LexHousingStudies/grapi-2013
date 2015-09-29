@@ -18,7 +18,8 @@ info.onAdd = function (map) {
 
 info.update = function (props) {
     this._div.innerHTML = (props ?
-        '<h3>Tract ' + props.TRACTCE + ', Blockgroup ' + props.BLKGRPCE + '</h3><hr /><b>' + props.PrcntAbv30 + '%</b> of the population, or <b>' + props.TtlAbv30 + '</b> people, have a gross rent as percent of income greater than 30%.'
+        '<h3>Tract ' + props.TRACTCE + ', Blockgroup ' + props.BLKGRPCE + '</h3><hr /><b>' 
+        + props.PrcntAbv30 + '%</b> of households, <b>' + props.TtlAbv30 + '</b> total, have a gross rent as percent of income greater than 30%.'
         : 'Hover over a block group');
 };
 
@@ -85,7 +86,7 @@ legend.onAdd = function (map) {
 	var div = L.DomUtil.create('div', 'info legend'),
 	grades = [0, 15, 30, 45, 60],
 	labels = [];
-	div.innerHTML = '<h4>% of population where GRAPI > 30% (2013)</h4>'
+	div.innerHTML = '<h4>% of households where GRAPI > 30% (2013)</h4>'
 	for (var i = 0; i < grades.length; i++) {
 		div.innerHTML += '<i style="background:' + getColor(grades[i]+1) + '"></i> ' + grades[i] + (grades[i + 1] ? '&ndash;' + grades[i+1] + '<br>' : '+');
 	}
