@@ -1,146 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset=utf-8 />
-<title>Percentage of population w/ GRAPI >30%</title>
-<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <meta charset=utf-8 />
+    <title>Percentage of population w/ GRAPI >30%</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <!-- Styles -->
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- Header -->
+<header class="group">
+    <div class="appName">
+        <h4>Gross Rent as Percent of Income (GRAPI), 2013</h4>
+        <p>Census Block Groups, Lexington, KY</p>
+    </div>
+    <div class="logo">
+        <a href="http://lexhousingstudies.github.io/"><img src="lhs-logo.png" /></a>
+    </div>
+</header>
+
+<!-- Map container-->
+<div class="map-application">
+    <div id='map' class='map'></div>
+</div>
+
+<!-- JS Libraries -->
 <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
 <script type="text/javascript" src="https://cdn.rawgit.com/calvinmetcalf/leaflet-ajax/gh-pages/dist/leaflet.ajax.min.js"></script>
 <!-- <script type="text/javascript" src="leaflet.ajax.min.js"></script> -->
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
-<style>
-  body { margin:0; padding:0; }
-  #map { position:absolute; top:0; bottom:0; width:100%; }
-  .info {
-    padding: 6px 8px;
-    font: 14px/16px Arial, Helvetica, sans-serif;
-    background: white;
-    background: rgba(255,255,255,0.8);
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    border-radius: 5px;
-    max-width: 300px;
-}
-.info h4 {
-    margin: 0 0 5px;
-    color: #000;
-}
-  .legend {
-    line-height: 18px;
-    color: #000;
-    max-width: 200px;
-}
-.legend i {
-    width: 18px;
-    height: 18px;
-    float: left;
-    margin-right: 8px;
-    opacity: 0.7;
-}
-.legend h4 {
-	padding: 0;
-	margin: 0;
-}
-</style>
-</head>
-<body>
-<div id='map'></div>
-<script>
-var map = L.map('map')
-    .setView([38.046408, -84.497083], 11);
 
-var base = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
-	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-	subdomains: 'abcd',
-	maxZoom: 19
-}).addTo(map);
-
-var grapi;
-var info = L.control();
-
-info.onAdd = function (map) {
-    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-    this.update();
-    return this._div;
-};
-
-info.update = function (props) {
-    this._div.innerHTML = (props ?
-        '<b>Tract ' + props.TRACTCE + ', Blockgroup ' + props.BLKGRPCE + '</b><br />' + props.TtlAbv30 + ' people or ' + props.PrcntAbv30 + '% of the population have a gross rent as percent of income greater than 30%'
-        : 'Hover over a blockgroup');
-};
-
-info.addTo(map)
-
-function highlightFeature(e) {
-    var layer = e.target;
-
-    layer.setStyle({
-        weight: 5,
-        color: '#666',
-        dashArray: '',
-        fillOpacity: 0.7
-    });
-
-    if (!L.Browser.ie && !L.Browser.opera) {
-        layer.bringToFront();
-    }
-    info.update(layer.feature.properties);
-}
-
-function resetHighlight(e) {
-	grapi.resetStyle(e.target);
-	info.update();
-}
-
-function zoomToFeature(e) {
-    map.fitBounds(e.target.getBounds());
-}
-
-function onEachFeature(feature, layer) {
-    layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight,
-        click: zoomToFeature
-    });
-}
-
-function getColor(d) {
-	return d > 60 ? "#d7191c":
-		d > 45 ? "#fdae61":
-		d > 30 ? "#ffffbf":
-		d > 15 ? "#abd9e9":
-		d >= 0 ? "#2c7bb6":
-			"#fff";
-}
-
-function style(feature) {
-	return {
-		fillColor:getColor(feature.properties.PrcntAbv30),
-		weight: 1,
-		opacity: 1,
-		color: "white",
-		fillOpacity: 0.6
-	}
-}
-
-grapi = new L.GeoJSON.AJAX("https://gist.githubusercontent.com/maptastik/af28869a22d3947b7767/raw/36af6213ccb7c7ef909cb4e038963de6ab489ae9/grapi.geojson", {
-      style: style,
-      onEachFeature: onEachFeature
-    }).addTo(map);
-
-var legend = L.control({position: 'bottomright'});
-legend.onAdd = function (map) {
-	var div = L.DomUtil.create('div', 'info legend'),
-	grades = [0, 15, 30, 45, 60],
-	labels = [];
-	div.innerHTML = '<h4>% of population where GRAPI > 30% (2013)</h4><br>'
-	for (var i = 0; i < grades.length; i++) {
-		div.innerHTML += '<i style="background:' + getColor(grades[i]+1) + '"></i> ' + grades[i] + (grades[i + 1] ? '&ndash;' + grades[i+1] + '<br>' : '+');
-	}
-
-	return div;
-};
-legend.addTo(map);
-</script>
+<!-- Map -->
+<script src="app.js"></script>
 </body>
 </html>

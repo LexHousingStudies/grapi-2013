@@ -1,0 +1,104 @@
+*,
+*:before,
+*:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.group:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+body,
+html {
+    font-family: 'Lato', sans-serif;
+    height: 100%;
+}
+
+header, .map-application {
+    min-width: 400px;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50px;
+    padding: 5px;
+    z-index: 9;
+    border-bottom: 1px solid #eee;
+    width:100%;
+    background-color: whitesmoke;
+    box-shadow: 0px 2.5px 5px 0px rgba(48,48,48,0.85);}
+header .appName {
+    float: left;
+    /*padding: 5px;*/
+}
+
+header .logo {
+    float: right;
+}
+header .logo>a>img {
+    width: 40px;
+    height: 40px;
+    box-shadow: 1px 1px 5px 0px rgba(48,48,48,1);
+}
+.map {
+    width: 100%;
+    height: 100%;
+}
+
+.map-application {
+    height: 100%;
+    
+    padding-top: 50px;
+    
+}
+
+
+.info {
+padding: 6px 8px;
+font: 14px/16px 'Lato', sans-serif;
+background: whitesmoke;
+/*background: rgba(255,255,255,0.8);*/
+/*box-shadow: 0 0 15px rgba(0,0,0,0.2);*/
+box-shadow: 0px 2.5px 5px 0px rgba(48,48,48,0.85);
+/*border-radius: 5px;*/
+max-width: 300px;
+}
+.info h3 {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 700;
+    font-size: 1em;
+    margin: 0 0 5px;
+    color: #000;
+}
+
+.info hr {
+    margin-top: 2px;
+    border-top-style: solid;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style
+    border-width: 1px;
+}
+.legend {
+    line-height: 18px;
+    color: #000;
+    max-width: 150px;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+.legend h4 {
+	padding: 0;
+	margin: 0;
+    margin-bottom: 5px;
+}
