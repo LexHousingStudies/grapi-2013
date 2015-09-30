@@ -80,7 +80,7 @@ function style(feature) {
 	}
 }
 
-grapi = new L.GeoJSON.AJAX("grapi.geojson", {
+grapi = new L.GeoJSON.AJAX("grapi-filter.geojson", {
       style: style,
       onEachFeature: onEachFeature
     }).addTo(map);
